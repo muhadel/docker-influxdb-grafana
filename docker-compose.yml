@@ -1,0 +1,74 @@
+version: '3.1'
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: always
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - app-network
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    restart: always
+    ports:
+      - '8086:8086'
+      - '2223:22'
+    stdin_open: true
+    tty: true
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    env_file:
+      - 'env.influxdb'
+    # command: apt update && apt install -y openssh-server && /bin/sh -c /entrypoint.sh
+    # command: apt install -y openssh-server && /bin/sh -c /entrypoint.sh
+    # command: /bin/sh -c /entrypoint.sh
+    # command: /bin/sh -c /entrypoint.sh && apt update && apt install -y openssh-server
+    #Working fine
+    # command: bash -c "usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb && apt-get update && apt install -y openssh-server && echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config && service ssh start && /bin/sh -c /entrypoint.sh"
+    #Port 22
+    #command: bash -c "apk add --no-cache util-linux iproute2 net-tools iputils iperf tcptraceroute openssh openssh-server && /bin/sh -c /entrypoint.sh"
+    command: >
+      sh -c "
+        apt-get update &&
+        apt install -y openssh-server &&
+        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
+        service ssh start &&
+        usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb &&
+        /bin/sh -c /entrypoint.sh
+        "
+    networks:
+      - app-network
+
+  disk_usage_cronjob:
+    container_name: disk_usage_cronjob
+    restart: always
+    ports:
+      - '2222:22'
+    build:
+      context: disk_usage_cronjob
+    depends_on:
+      influxdb:
+        condition: service_started
+    command: >
+      sh -c "
+        /wait-for-it.sh influxdb:8086 --strict -- sshpass -p influxdb ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no influxdb@influxdb &&
+        python main.py
+        "
+    stop_signal: SIGINT
+    stdin_open: true
+    tty: true
+    networks:
+      - app-network
+volumes:
+  grafana-data:
+  influxdb-data:
+networks:
+  app-network:
+    driver: bridge
