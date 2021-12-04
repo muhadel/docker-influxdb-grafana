@@ -19,6 +19,8 @@ RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P password
 
 # copy the dependencies file to the working directory
 COPY requirements.txt .
+# copy the .env.example to .env
+COPY .env.example .env
 # install dependencies
 RUN pip install -r requirements.txt
 # copy the content of the local src directory to the working directory

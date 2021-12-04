@@ -1,15 +1,14 @@
-from datetime import datetime
-import os
-from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
+from utils.config import config
 
 
 class InfluxDB:
     __client = None
-    url = "http://3.248.197.128:8086"
-    token = "this-is-my-super-secret-token"
-    org = "my-org"
-    bucket = "default"
+    url = config.get('INFLUXDB_URL')
+    token = config.get('INFLUXDB_ADMIN_TOKEN')
+    org = config.get('INFLUXDB_ORG')
+    bucket = config.get('INFLUXDB_BUCKET')
 
     @staticmethod
     def getInstance():
@@ -17,6 +16,7 @@ class InfluxDB:
         Get InfluxDB client instance
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
+        print("config.get('INFLUXDB_URL')", config.get('INFLUXDB_URL'))
         if InfluxDB.__client is None: InfluxDB.__client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,
                                                                          org=InfluxDB.org)
         return InfluxDB.__client
@@ -48,12 +48,18 @@ class InfluxDB:
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        print(data)
-        return write_api.write(self.bucket, self.org, data)
+        write_api.write(self.bucket, self.org, data)
+        print("[*] Writing data: " + data)
 
     def executeQuery(self):
+        """
+        Execute Query on Influx DB
+        This method returns all data in all measurements by specifying bucket name in the query (Bucket_Name=default)
+        :return: None
+        """
         query = 'from(bucket: "default") |> range(start: -1h)'
         tables = self.getInstance().query_api().query(query, org=self.org)
+        print(tables)
         for table in tables:
             for record in table.records:
                 print(record)
