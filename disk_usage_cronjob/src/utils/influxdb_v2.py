@@ -16,7 +16,6 @@ class InfluxDB:
         Get InfluxDB client instance
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
-        print("config.get('INFLUXDB_URL')", config.get('INFLUXDB_URL'))
         if InfluxDB.__client is None: InfluxDB.__client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,
                                                                          org=InfluxDB.org)
         return InfluxDB.__client

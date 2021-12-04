@@ -26,14 +26,6 @@ services:
       - influxdb-data:/var/lib/influxdb
     env_file:
       - 'env.influxdb'
-    # command: apt update && apt install -y openssh-server && /bin/sh -c /entrypoint.sh
-    # command: apt install -y openssh-server && /bin/sh -c /entrypoint.sh
-    # command: /bin/sh -c /entrypoint.sh
-    # command: /bin/sh -c /entrypoint.sh && apt update && apt install -y openssh-server
-    #Working fine
-    # command: bash -c "usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb && apt-get update && apt install -y openssh-server && echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config && service ssh start && /bin/sh -c /entrypoint.sh"
-    #Port 22
-    #command: bash -c "apk add --no-cache util-linux iproute2 net-tools iputils iperf tcptraceroute openssh openssh-server && /bin/sh -c /entrypoint.sh"
     command: >
       sh -c "
         apt-get update &&
@@ -56,6 +48,7 @@ services:
     depends_on:
       influxdb:
         condition: service_started
+    # Waits for influxdb container to start to copy ssh key to the authorized_keys
     command: >
       sh -c "
         /wait-for-it.sh influxdb:8086 --strict -- sshpass -p influxdb ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no influxdb@influxdb &&
