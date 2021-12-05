@@ -32,7 +32,8 @@ And to record the disk usage in influxdb container and plot the disk usage graph
 ```
 
 ## Grafana Disk Usage Dashboard:
-![Disk-usage-dashboard](https://user-images.githubusercontent.com/32979588/144740078-6b38121e-254a-4dca-8f8d-6eaaa6acf7c3.PNG)
+![Disk-usage-dashboard-in-MB](https://user-images.githubusercontent.com/32979588/144740522-6cf08649-5e7d-40f1-b147-ef0d99016bfb.png)
+
 
 ## Run app by docker-compose
 ```bash
