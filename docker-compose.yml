@@ -29,7 +29,7 @@ services:
       - influxdb-data:/var/lib/influxdb
     env_file:
       - "env.influxdb"
-    command: ["/bin/sh", "-c", "/entrypoint.sh"]
+    # command: ["/bin/sh", "-c", "/entrypoint.sh"]
     # >
     # sh -c "
     #   apt-get update &&
