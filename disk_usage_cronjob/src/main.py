@@ -1,6 +1,5 @@
 # Pkg:
 import schedule
-import time
 from datetime import datetime
 from utils import influxdb_v1, disk_usage
 
@@ -18,22 +17,13 @@ def job():
     influx_line_protocol = "total={},used={},free={}".format(stat[1], stat[2], stat[3])
     influx_db.write_data('disk_usage', influx_line_protocol, 'host=influxdb,Unit=Megabyte')
 
-def job2():
-    # Log cron job execution time
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    print("[*] Cron job executed at " + dt_string)
-   
-
-
 if __name__ == '__main__':
     try:
         print("[*] Initialize CronJob: ")
-        if True:
-            schedule.every(5).seconds.do(job)
+        
+        schedule.every(5).seconds.do(job)
         while True:
             schedule.run_pending()
-            time.sleep(1)
     except Exception as e:
         print("[*] Oops!", e.__class__, "occurred.")
         print(e)

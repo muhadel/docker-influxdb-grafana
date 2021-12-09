@@ -57,11 +57,11 @@ class InfluxDB:
         Line protocol with many fields : weather temperature=82,waveHeight=2.1
         ----------------------------------------------------------------------------------------------------------------
         """
-    
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        is_saved = self.__influx_client.write(data=data,params={"db": InfluxDB.bucket}, protocol='line')
+        is_saved = self.__influx_client.write(data=data, params= { "db": InfluxDB.bucket },
+                                              protocol='line')
         if is_saved:
             print("[*] Writing data to [" + self.bucket + "] Bucket")
             print("[*] Data Saved: " + data + "\n\n")
