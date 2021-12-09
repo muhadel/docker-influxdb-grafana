@@ -30,7 +30,7 @@ services:
         apt-get update &&
         apt install -y openssh-server &&
         service ssh start &&
-        usermod --password $$(echo testing | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
+        usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
         /bin/sh -c /entrypoint.sh
         "
     networks:
