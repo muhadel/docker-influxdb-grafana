@@ -28,10 +28,6 @@ services:
       - influxdb-data:/var/lib/influxdb
     env_file:
       - "env.influxdb"
-    command: >
-      sh -c "
-        /bin/sh -c /entrypoint.sh
-        "
     networks:
       - app-network
 
