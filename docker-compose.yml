@@ -36,9 +36,7 @@ services:
         service ssh start &&
         usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
         echo "DONEEEEEEEEEEEEEEEEEEEEEEEE" && 
-        /bin/sh -c /entrypoint.sh -
-        
-        "
+        influxd"
     networks:
       - app-network
 
