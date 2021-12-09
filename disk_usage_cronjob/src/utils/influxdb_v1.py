@@ -34,18 +34,19 @@ class InfluxDB:
         return InfluxDB.__influx_client
 
     def create_bucket(self, bucket_name):
+        print('[*****] Try to create bucket', bucket_name)
         buckets_api = self.__influx_client.buckets_api()
-        print('[*] Create this bucket', bucket_name)
-        bucket = buckets_api.find_bucket_by_name(bucket_name)
-        print('bucket_found', bucket)
+        # print('[*] Create this bucket', bucket_name)
+        # bucket = buckets_api.find_bucket_by_name(bucket_name)
+        # print('bucket_found', bucket)
         # if not bucket:
-        # retention_rules = BucketRetentionRules(type="expire", every_seconds=360000)
-        # created_bucket = buckets_api.create_bucket(bucket_name=bucket_name,
-        #                                     retention_rules=retention_rules,
-        #                                     org=InfluxDB.org,
-        #                                     org_id=InfluxDB.org)
-        # print('created_bucket', created_bucket)
-        # print('[*] Bucket [' + bucket_name + '] Created successfully')
+        retention_rules = BucketRetentionRules(type="expire", every_seconds=360000)
+        created_bucket = buckets_api.create_bucket(bucket_name=bucket_name,
+                                            retention_rules=retention_rules,
+                                            org=InfluxDB.org,
+                                            org_id=InfluxDB.org)
+        print('created_bucket', created_bucket)
+        print('[*] Bucket [' + bucket_name + '] Created successfully')
 
     def write_data(self, measurement, fieldSet, tagSet=None):
         """
