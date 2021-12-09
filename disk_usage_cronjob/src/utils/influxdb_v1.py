@@ -27,7 +27,6 @@ class InfluxDB:
             print('[*] Creating new influx client instance')
             print("[*]", InfluxDB.host, InfluxDB.port, InfluxDB.username, InfluxDB.port)
             InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.port, password=InfluxDB.password)
-            print("CLient", InfluxDB.__influx_client)
 
         # Created bucket if not exists
         InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
@@ -37,6 +36,7 @@ class InfluxDB:
     def create_bucket(self, bucket_name):
         print('[*****] Try to create bucket', bucket_name)
         buckets = self.__influx_client.get_list_database()
+        print("ALL_BUCKETS", buckets)
         if bucket_name not in buckets:
             self.__influx_client.create_database(bucket_name)
             print('[*] Bucket [' + bucket_name + '] Created successfully')
@@ -69,9 +69,12 @@ class InfluxDB:
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        self.__influx_client.write(data=data,params={"db": InfluxDB.bucket}, protocol='line')
-        print("[*] Writing data to [" + self.bucket + "] Bucket")
-        print("[*] Data Saved: " + data + "\n\n")
+        is_saved = self.__influx_client.write(data=data,params={"db": InfluxDB.bucket}, protocol='line')
+        if is_saved:
+            print("[*] Writing data to [" + self.bucket + "] Bucket")
+            print("[*] Data Saved: " + data + "\n\n")
+
+        
         
 
     # def execute_query(self):
