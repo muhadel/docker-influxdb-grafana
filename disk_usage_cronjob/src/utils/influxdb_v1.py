@@ -23,9 +23,6 @@ class InfluxDB:
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
         if InfluxDB.__influx_client is None:
-
-            print('[*] Creating new influx client instance')
-            print("[*]", InfluxDB.host, InfluxDB.port, InfluxDB.username, InfluxDB.port)
             InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.port, password=InfluxDB.password)
             # Created bucket if not exists
             InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
@@ -33,10 +30,8 @@ class InfluxDB:
         return InfluxDB.__influx_client
 
     def create_bucket(self, bucket_name):
-        print('[*****] Try to create bucket', bucket_name)
         buckets = self.__influx_client.get_list_database()
         is_bucket_found = any(bucket['name'] == bucket_name for bucket in buckets)
-        print("ALL_BUCKETS", buckets)
         if not is_bucket_found:
             self.__influx_client.create_database(bucket_name)
             print('[*] Bucket [' + bucket_name + '] Created successfully')
