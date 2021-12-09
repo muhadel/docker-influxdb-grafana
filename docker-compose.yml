@@ -53,7 +53,7 @@ services:
         echo "=============================================================" &&
         echo "=============================================================" &&
         echo "$${INFLUXDB_CONTAINER_PASSWORD}" &&
-        echo "${INFLUXDB_CONTAINER_USER}"@"${INFLUXDB_CONTAINER_HOST}" &&
+        echo "$${INFLUXDB_CONTAINER_USER}"@"$${INFLUXDB_CONTAINER_HOST}" &&
         python main.py
         "
     stop_signal: SIGINT
