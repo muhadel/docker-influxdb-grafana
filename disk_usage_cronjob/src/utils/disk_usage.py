@@ -25,6 +25,5 @@ def get_disk_usage():
     while True:
         i = i + 1
         line = df.readline()
-        print(line)
         if i == 2:
             return line.split()[0:6]
