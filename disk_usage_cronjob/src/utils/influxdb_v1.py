@@ -25,8 +25,8 @@ class InfluxDB:
         if InfluxDB.__influx_client is None:
 
             print('[*] Creating new influx client instance')
-            print("[*]", InfluxDB.url, InfluxDB.token, InfluxDB.org)
-            InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.username, password=InfluxDB.password)
+            print("[*]", InfluxDB.host, InfluxDB.port, InfluxDB.username, InfluxDB.port)
+            InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.port, password=InfluxDB.password)
             print("CLient", InfluxDB.__influx_client)
 
         # Created bucket if not exists
