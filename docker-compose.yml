@@ -1,11 +1,11 @@
-version: '3.1'
+version: "3.1"
 services:
   grafana:
     container_name: grafana
     image: grafana/grafana
     restart: always
     ports:
-      - '3000:3000'
+      - "3000:3000"
     stdin_open: true
     tty: true
     volumes:
@@ -18,21 +18,19 @@ services:
     image: influxdb:latest
     restart: always
     ports:
-      - '8086:8086'
-      - '2223:22'
+      - "8086:8086"
     stdin_open: true
     tty: true
     volumes:
       - influxdb-data:/var/lib/influxdb
     env_file:
-      - 'env.influxdb'
+      - "env.influxdb"
     command: >
       sh -c "
         apt-get update &&
         apt install -y openssh-server &&
-        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
         service ssh start &&
-        usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb &&
+        usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
         /bin/sh -c /entrypoint.sh
         "
     networks:
@@ -41,19 +39,20 @@ services:
   disk_usage_cronjob:
     container_name: disk_usage_cronjob
     restart: always
-    ports:
-      - '2222:22'
+    env_file:
+      - "./disk_usage_cronjob/.env.example"
     build:
       context: disk_usage_cronjob
     depends_on:
       influxdb:
         condition: service_started
     # Waits for influxdb container to start to copy ssh key to the authorized_keys
+    # StrictHostKeyChecking will automatically add the host key to your known_hosts file if it's not already there.
     command: >
       sh -c "
-        /wait-for-it.sh influxdb:8086 --strict -- sshpass -p influxdb ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no influxdb@influxdb &&
-        python main.py
-        "
+          /wait-for-it.sh $${INFLUXDB_CONTAINER_HOST}:$${INFLUXDB_CONTAINER_PORT} --strict -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
+          python main.py
+          "
     stop_signal: SIGINT
     stdin_open: true
     tty: true

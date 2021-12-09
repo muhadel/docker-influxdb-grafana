@@ -1,32 +1,49 @@
-from influxdb_client import InfluxDBClient
+from influxdb_client import InfluxDBClient, BucketRetentionRules
 from influxdb_client.client.write_api import SYNCHRONOUS
 from utils.config import config
 
 
 class InfluxDB:
-    __client = None
+    __influx_client = None
     url = config.get('INFLUXDB_URL')
     token = config.get('INFLUXDB_ADMIN_TOKEN')
     org = config.get('INFLUXDB_ORG')
     bucket = config.get('INFLUXDB_BUCKET')
 
+    def __init__(self):
+        self.__influx_client = InfluxDB.get_influx_client()
+
     @staticmethod
-    def getInstance():
+    def get_influx_client():
         """
         Get InfluxDB client instance
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
-        if InfluxDB.__client is None: InfluxDB.__client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,
-                                                                         org=InfluxDB.org)
-        return InfluxDB.__client
+        if InfluxDB.__influx_client is None:
+            print('[*] Creating new influx client instance')
+            InfluxDB.__influx_client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,org=InfluxDB.org)
 
-    def writeData(self, measurement, fieldSet, tagSet=None):
+        # Created bucket if not exists
+        InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
+
+        return InfluxDB.__influx_client
+
+    def create_bucket(self, bucket_name):
+        buckets_api = self.__influx_client.buckets_api()
+        bucket = buckets_api.find_bucket_by_name(bucket_name)
+        if not bucket:
+            retention_rules = BucketRetentionRules(type="expire", every_seconds=360000)
+            created_bucket = buckets_api.create_bucket(bucket_name=bucket_name,
+                                               retention_rules=retention_rules,
+                                               org=InfluxDB.org)
+            print('[*] Bucket [' + bucket_name + '] Created successfully')
+
+    def write_data(self, measurement, fieldSet, tagSet=None):
         """
         Write Data To InfluxDB version 2
-        :param measurement: The name of the measurement that you want to write your data to. The measurement is required
-                            in line protocol.
+        :param measurement: The name of the measurement that you want to write your data to. The measurement is required in line protocol.
         :param fieldSet: The field(s) for your data point. Every data point requires at least one field in line protocol.
-                        Separate field key-value pairs with an equals sign = and no spaces
+        Separate field key-value pairs with an equals sign = and no spaces
         :param tagSet: The tag(s) that you want to include with your data point. Tags are optional in line protocol.
         :return: None
         ----------------------------------------------------------------------------------------------------------------
@@ -43,29 +60,29 @@ class InfluxDB:
         ----------------------------------------------------------------------------------------------------------------
         """
         # define influxDB write endpoint to write data
-        write_api = self.getInstance().write_api(write_options=SYNCHRONOUS)
+        write_api = self.__influx_client.write_api(write_options=SYNCHRONOUS)
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
         write_api.write(self.bucket, self.org, data)
-        print("[*] Writing data: " + data)
+        print("[*] Writing data: " + data +"\n\n\n")
 
-    def executeQuery(self):
+    def execute_query(self):
         """
         Execute Query on Influx DB
         This method returns all data in all measurements by specifying bucket name in the query (Bucket_Name=default)
         :return: None
         """
         query = 'from(bucket: "default") |> range(start: -1h)'
-        tables = self.getInstance().query_api().query(query, org=self.org)
+        tables = self.__influx_client.query_api().query(query, org=self.org)
         print(tables)
         for table in tables:
             for record in table.records:
                 print(record)
 
-    def closeConnection(self):
+    def close_connection(self):
         """
         Close Connection of InfluxDB Client
         :return: None
         """
-        self.getInstance().close()
+        self.__influx_client.close()

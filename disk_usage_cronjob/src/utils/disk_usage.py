@@ -2,7 +2,7 @@ import os
 from utils.config import config
 
 
-def getDiskUsage():
+def get_disk_usage():
     """
     Get Disk Usage
     --------------
@@ -16,15 +16,14 @@ def getDiskUsage():
 
 
     """
-    command = "sshpass -p {} ssh -i /root/.ssh/id_rsa.pub {}@{} 'df'".format(
+    command = "sshpass -p {} ssh {}@{} 'df'".format(
         config.get('INFLUXDB_CONTAINER_PASSWORD'),
         config.get('INFLUXDB_CONTAINER_USER'),
-        config.get('INFLUXDB_CONTAINER_PASSWORD'))
+        config.get('INFLUXDB_CONTAINER_HOST'))
     df = os.popen(command)
     i = 0
     while True:
         i = i + 1
         line = df.readline()
-        print(line)
         if i == 2:
             return line.split()[0:6]
