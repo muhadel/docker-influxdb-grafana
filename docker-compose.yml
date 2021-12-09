@@ -8,6 +8,9 @@ services:
       - "3000:3000"
     stdin_open: true
     tty: true
+    depends_on:
+      influxdb:
+        condition: service_started
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
@@ -15,10 +18,11 @@ services:
 
   influxdb:
     container_name: influxdb
-    image: influxdb:latest
+    image: influxdb:1.8
     restart: always
     ports:
       - "8086:8086"
+      - "2003:2003"
     stdin_open: true
     tty: true
     volumes:
@@ -29,10 +33,11 @@ services:
       sh -c "
         apt-get update &&
         apt install -y openssh-server &&
+        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && 
+        echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && 
         service ssh start &&
         usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
-        /bin/sh -c /entrypoint.sh
-        "
+        influxd"
     networks:
       - app-network
 
@@ -50,10 +55,8 @@ services:
     # StrictHostKeyChecking will automatically add the host key to your known_hosts file if it's not already there.
     command: >
       sh -c "
-          /wait-for-it.sh $${INFLUXDB_CONTAINER_HOST}:$${INFLUXDB_CONTAINER_PORT} --strict -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
-          python main.py
-          "
-    stop_signal: SIGINT
+        /wait-for-it.sh $${INFLUXDB_CONTAINER_HOST}:$${INFLUXDB_CONTAINER_PORT} -s -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
+        python main.py"
     stdin_open: true
     tty: true
     networks:
