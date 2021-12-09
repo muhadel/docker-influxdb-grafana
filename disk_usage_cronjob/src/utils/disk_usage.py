@@ -19,7 +19,7 @@ def get_disk_usage():
     command = "sshpass -p {} ssh -i /root/.ssh/id_rsa.pub {}@{} 'df'".format(
         config.get('INFLUXDB_CONTAINER_PASSWORD'),
         config.get('INFLUXDB_CONTAINER_USER'),
-        config.get('INFLUXDB_CONTAINER_PASSWORD'))
+        config.get('INFLUXDB_CONTAINER_HOST'))
     df = os.popen(command)
     i = 0
     while True:
