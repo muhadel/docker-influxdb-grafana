@@ -43,7 +43,7 @@ services:
     ports:
       - "2222:22"
     env_file:
-      - ".env"
+      - ".env.example"
     build:
       context: disk_usage_cronjob
     depends_on:
