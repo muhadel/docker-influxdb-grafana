@@ -33,7 +33,7 @@ services:
       sh -c "
         apt-get update &&
         apt install -y openssh-server &&
-        echo 'PasswordAuthentication yes >> /etc/ssh/sshd_config && 
+        echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && 
         service ssh start &&
         usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
         influxd"
