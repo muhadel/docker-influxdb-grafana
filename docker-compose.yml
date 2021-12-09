@@ -30,7 +30,6 @@ services:
       sh -c "
         apt-get update &&
         apt install -y openssh-server &&
-        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
         service ssh start &&
         usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb &&
         /bin/sh -c /entrypoint.sh
