@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y sshpass openssh-client
 # generage ssh key with passphrase password
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P password
 # change permissions of id_rsa
-# RUN chmod 600 /root/.ssh/id_rsa.pub
+RUN chmod -R 600 /root/.ssh
 # copy the dependencies file to the working directory
 COPY requirements.txt .
 # copy the environment variables
@@ -19,7 +19,5 @@ COPY src/ .
 # add execute permission wait-for-it.sh
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
-# expose SSH port
-EXPOSE 2222
 # command to run on container start
 CMD ["python", "main.py"]
