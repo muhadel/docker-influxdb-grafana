@@ -25,7 +25,7 @@ class InfluxDB:
             print("CLient", InfluxDB.__influx_client)
 
         # Created bucket if not exists
-        InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
+        # InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
 
         return InfluxDB.__influx_client
 
