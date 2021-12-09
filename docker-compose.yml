@@ -52,6 +52,8 @@ services:
       sh -c "
         echo "============================================================="
         echo "============================================================="
+        echo $(INFLUXDB_CONTAINER_USER)
+        echo $$(INFLUXDB_CONTAINER_USER)
         echo "${INFLUXDB_CONTAINER_USER}"@"${INFLUXDB_CONTAINER_HOST}" &&
         python main.py
         "
