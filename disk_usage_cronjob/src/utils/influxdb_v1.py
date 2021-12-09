@@ -23,7 +23,10 @@ class InfluxDB:
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
         if InfluxDB.__influx_client is None:
-            InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.port, password=InfluxDB.password)
+            InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host,
+                                                    port=InfluxDB.port,
+                                                    username=InfluxDB.port,
+                                                    password=InfluxDB.password)
             # Created bucket if not exists
             InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
 
@@ -35,6 +38,7 @@ class InfluxDB:
         if not is_bucket_found:
             self.__influx_client.create_database(bucket_name)
             print('[*] Bucket [' + bucket_name + '] Created successfully')
+
 
     def write_data(self, measurement, fieldSet, tagSet=None):
         """
@@ -60,8 +64,10 @@ class InfluxDB:
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        is_saved = self.__influx_client.write(data=data, params= { "db": InfluxDB.bucket },
-                                              protocol='line')
+        # write the line protocol
+        is_saved = self.__influx_client.write(data=data, 
+                                            params= { "db": InfluxDB.bucket },
+                                            protocol='line')
         if is_saved:
             print("[*] Writing data to [" + self.bucket + "] Bucket")
             print("[*] Data Saved: " + data + "\n\n")
