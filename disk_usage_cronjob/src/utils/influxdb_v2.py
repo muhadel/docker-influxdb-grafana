@@ -37,10 +37,6 @@ class InfluxDB:
                                                retention_rules=retention_rules,
                                                org=InfluxDB.org)
             print('[*] Bucket [' + bucket_name + '] Created successfully')
-            print(created_bucket)
-        
-
-
 
     def write_data(self, measurement, fieldSet, tagSet=None):
         """
