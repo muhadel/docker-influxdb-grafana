@@ -21,6 +21,7 @@ class InfluxDB:
         """
         if InfluxDB.__influx_client is None:
             print('[*] Creating new influx client instance')
+            print("[*]", InfluxDB.url, InfluxDB.token, InfluxDB.org)
             InfluxDB.__influx_client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,org=InfluxDB.org)
             print("CLient", InfluxDB.__influx_client)
             # buckets_api = InfluxDB.__influx_client.buckets_api()
