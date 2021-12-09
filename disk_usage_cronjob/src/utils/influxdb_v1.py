@@ -72,7 +72,7 @@ class InfluxDB:
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        write_api.write(self.bucket, self.org, data)
+        write_api.write("testing", self.org, data)
         print("[*] Writing data to [" + self.bucket + "] Bucket")
         print("[*] Data Saved: " + data + "\n\n")
         
