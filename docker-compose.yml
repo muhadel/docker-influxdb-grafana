@@ -40,27 +40,27 @@ services:
     networks:
       - app-network
 
-  # disk_usage_cronjob:
-  #   container_name: disk_usage_cronjob
-  #   restart: always
-  #   env_file:
-  #     - "./disk_usage_cronjob/.env.example"
-  #   build:
-  #     context: disk_usage_cronjob
-  #   depends_on:
-  #     influxdb:
-  #       condition: service_started
-  #   # Waits for influxdb container to start to copy ssh key to the authorized_keys
-  #   # StrictHostKeyChecking will automatically add the host key to your known_hosts file if it's not already there.
-  #   command: >
-  #     sh -c "
-  #       /wait-for-it.sh influxdb:8086 -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
-  #       python main.py"
-  #   stop_signal: SIGINT
-  #   stdin_open: true
-  #   tty: true
-  #   networks:
-  #     - app-network
+  disk_usage_cronjob:
+    container_name: disk_usage_cronjob
+    restart: always
+    env_file:
+      - "./disk_usage_cronjob/.env.example"
+    build:
+      context: disk_usage_cronjob
+    depends_on:
+      influxdb:
+        condition: service_started
+    # Waits for influxdb container to start to copy ssh key to the authorized_keys
+    # StrictHostKeyChecking will automatically add the host key to your known_hosts file if it's not already there.
+    # command: >
+    #   sh -c "
+    #     /wait-for-it.sh influxdb:8086 -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
+    #     python main.py"
+    stop_signal: SIGINT
+    stdin_open: true
+    tty: true
+    networks:
+      - app-network
 volumes:
   grafana-data:
   influxdb-data:
