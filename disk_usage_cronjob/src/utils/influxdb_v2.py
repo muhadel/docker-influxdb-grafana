@@ -65,7 +65,8 @@ class InfluxDB:
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
         write_api.write(self.bucket, self.org, data)
-        print("[*] Writing data: " + data +"\n\n\n")
+        print("[*] Writing data to [" + self.bucket + "] Bucket")
+        print("[*] Data Saved: " + data)
 
     def execute_query(self):
         """
