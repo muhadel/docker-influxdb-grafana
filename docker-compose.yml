@@ -8,6 +8,9 @@ services:
       - "3000:3000"
     stdin_open: true
     tty: true
+    depends_on:
+      influxdb:
+        condition: service_started
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
