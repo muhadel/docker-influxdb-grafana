@@ -29,15 +29,16 @@ services:
       - influxdb-data:/var/lib/influxdb
     env_file:
       - "env.influxdb"
-    command: >
-      sh -c "
-        apt-get update &&
-        apt install -y openssh-server &&
-        service ssh start &&
-        usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
-        echo "DONEEEEEEEEEEEEEEEEEEEEEEEE" && 
-        /bin/sh -c /entrypoint.sh
-        "
+    command: ["/bin/sh", "-c", "/entrypoint.sh"]
+    # >
+    # sh -c "
+    #   apt-get update &&
+    #   apt install -y openssh-server &&
+    #   service ssh start &&
+    #   usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
+    #   echo "DONEEEEEEEEEEEEEEEEEEEEEEEE" &&
+    #   /bin/sh -c /entrypoint.sh
+    #   "
     networks:
       - app-network
 
