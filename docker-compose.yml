@@ -1,20 +1,20 @@
 version: "3.1"
 services:
-  # grafana:
-  #   container_name: grafana
-  #   image: grafana/grafana
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     influxdb:
-  #       condition: service_started
-  #   volumes:
-  #     - grafana-data:/var/lib/grafana
-  #   networks:
-  #     - app-network
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      influxdb:
+        condition: service_started
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - app-network
 
   influxdb:
     container_name: influxdb

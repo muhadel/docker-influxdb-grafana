@@ -30,7 +30,7 @@ if __name__ == '__main__':
     try:
         print("[*] Initialize CronJob: ")
         if True:
-            schedule.every(5).seconds.do(job2)
+            schedule.every(5).seconds.do(job1)
         while True:
             schedule.run_pending()
             time.sleep(1)
