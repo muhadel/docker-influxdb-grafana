@@ -2,7 +2,7 @@ import os
 from utils.config import config
 
 
-def getDiskUsage():
+def get_disk_usage():
     """
     Get Disk Usage
     --------------
