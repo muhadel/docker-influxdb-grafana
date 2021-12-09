@@ -8,9 +8,9 @@ class InfluxDB:
     port = config.get('INFLUXDB_CONTAINER_PORT')
     username = config.get('INFLUXDB_USERNAME')
     password = config.get('INFLUXDB_PASSWORD')
-    url = config.get('INFLUXDB_URL')
-    token = config.get('INFLUXDB_ADMIN_TOKEN')
-    org = config.get('INFLUXDB_ORG')
+    # url = config.get('INFLUXDB_URL')
+    # token = config.get('INFLUXDB_ADMIN_TOKEN')
+    # org = config.get('INFLUXDB_ORG')
     bucket = config.get('INFLUXDB_BUCKET')
 
     def __init__(self):
@@ -28,9 +28,6 @@ class InfluxDB:
             print("[*]", InfluxDB.url, InfluxDB.token, InfluxDB.org)
             InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.username, password=InfluxDB.password)
             print("CLient", InfluxDB.__influx_client)
-            # buckets_api = InfluxDB.__influx_client.buckets_api()
-            # bucket = buckets_api.find_bucket_by_name("ADEL_BUCKET")
-            # print("bucket===>", bucket)
 
         # Created bucket if not exists
         InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
@@ -72,7 +69,7 @@ class InfluxDB:
         # concatenate comma before tag set if tagSet parameter is defined
         tagSet = ',' + tagSet if tagSet is not None else ''
         data = "{}{} {}".format(measurement, tagSet, fieldSet)
-        self.__influx_client.write(data=data, protocol='line')
+        self.__influx_client.write(data=data,params={"db": InfluxDB.bucket}, protocol='line')
         print("[*] Writing data to [" + self.bucket + "] Bucket")
         print("[*] Data Saved: " + data + "\n\n")
         
