@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y sshpass openssh-client
 # generage ssh key with passphrase password
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P password
 # change permissions of id_rsa
-RUN chmod 500 /root/.ssh/id_rsa.pub
+# RUN chmod 500 /root/.ssh/id_rsa.pub
 # copy the dependencies file to the working directory
 COPY requirements.txt .
 # copy the environment variables
