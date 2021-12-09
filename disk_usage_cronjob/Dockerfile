@@ -3,7 +3,7 @@ FROM python:3.8-slim-buster
 # set the working directory in the container
 WORKDIR /app
 # install openssh & sshpass in the docker container
-RUN apt-get update && apt-get install -y sshpass openssh-client netcat
+RUN apt-get update && apt-get install -y sshpass openssh-client
 # generage ssh key with passphrase password
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 # change permissions of id_rsa
@@ -19,8 +19,5 @@ COPY src/ .
 # add execute permission wait-for-it.sh
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
-# add execute permission wait-for-it.sh
-COPY wait-for.sh /wait-for.sh
-RUN chmod +x /wait-for.sh
 # command to run on container start
 CMD ["python", "main.py"]
