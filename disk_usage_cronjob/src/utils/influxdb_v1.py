@@ -29,7 +29,7 @@ class InfluxDB:
             # print("bucket===>", bucket)
 
         # Created bucket if not exists
-        InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
+        # InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
 
         return InfluxDB.__influx_client
 
