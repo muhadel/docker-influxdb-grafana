@@ -31,7 +31,7 @@ services:
         apt-get update &&
         apt install -y openssh-server &&
         service ssh start &&
-        usermod --password $$(echo influx | openssl passwd -1 -stdin) ${INFLUXDB_CONTAINER_USER} &&
+        usermod --password $$(echo influxdb | openssl passwd -1 -stdin) influxdb &&
         /bin/sh -c /entrypoint.sh
         "
     networks:
