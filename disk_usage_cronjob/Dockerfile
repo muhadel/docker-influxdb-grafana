@@ -3,7 +3,7 @@ FROM python:3.8-slim-buster
 # set the working directory in the container
 WORKDIR /app
 # install openssh & sshpass in the docker container
-RUN apt-get update && apt-get install -y sshpass openssh-client
+RUN apt-get update && apt-get install -y sshpass openssh-client netcat
 # generage ssh key with passphrase password
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 # change permissions of id_rsa
