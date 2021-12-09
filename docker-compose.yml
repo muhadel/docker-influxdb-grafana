@@ -31,7 +31,7 @@ services:
         apt-get update &&
         apt install -y openssh-server &&
         service ssh start &&
-        usermod --password $$(echo ${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) ${INFLUXDB_CONTAINER_USER} &&
+        usermod --password $$(echo influx | openssl passwd -1 -stdin) ${INFLUXDB_CONTAINER_USER} &&
         /bin/sh -c /entrypoint.sh
         "
     networks:
@@ -40,8 +40,6 @@ services:
   disk_usage_cronjob:
     container_name: disk_usage_cronjob
     restart: always
-    ports:
-      - "2222:22"
     env_file:
       - "./disk_usage_cronjob/.env.example"
     build:
