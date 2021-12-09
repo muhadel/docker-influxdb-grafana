@@ -27,22 +27,19 @@ class InfluxDB:
             print('[*] Creating new influx client instance')
             print("[*]", InfluxDB.host, InfluxDB.port, InfluxDB.username, InfluxDB.port)
             InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host, port=InfluxDB.port, username=InfluxDB.port, password=InfluxDB.password)
-
-        # Created bucket if not exists
-        InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
+            # Created bucket if not exists
+            InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
 
         return InfluxDB.__influx_client
 
     def create_bucket(self, bucket_name):
         print('[*****] Try to create bucket', bucket_name)
         buckets = self.__influx_client.get_list_database()
+        is_bucket_found = any(bucket['name'] == bucket_name for bucket in buckets)
         print("ALL_BUCKETS", buckets)
-        if bucket_name not in buckets:
+        if not is_bucket_found:
             self.__influx_client.create_database(bucket_name)
             print('[*] Bucket [' + bucket_name + '] Created successfully')
-
-            
-        
 
     def write_data(self, measurement, fieldSet, tagSet=None):
         """
@@ -75,21 +72,6 @@ class InfluxDB:
             print("[*] Data Saved: " + data + "\n\n")
 
         
-        
-
-    # def execute_query(self):
-    #     """
-    #     Execute Query on Influx DB
-    #     This method returns all data in all measurements by specifying bucket name in the query (Bucket_Name=default)
-    #     :return: None
-    #     """
-    #     query = 'from(bucket: "default") |> range(start: -1h)'
-    #     tables = self.__influx_client.query_api().query(query, org=self.org)
-    #     print(tables)
-    #     for table in tables:
-    #         for record in table.records:
-    #             print(record)
-
     def close_connection(self):
         """
         Close Connection of InfluxDB Client
