@@ -24,7 +24,7 @@ class InfluxDB:
             InfluxDB.__influx_client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,org=InfluxDB.org)
 
         # Created bucket if not exists
-        InfluxDB.create_bucket(InfluxDB.bucket)
+        InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
 
         return InfluxDB.__influx_client
 

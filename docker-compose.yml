@@ -1,11 +1,11 @@
-version: '3.1'
+version: "3.1"
 services:
   grafana:
     container_name: grafana
     image: grafana/grafana
     restart: always
     ports:
-      - '3000:3000'
+      - "3000:3000"
     stdin_open: true
     tty: true
     volumes:
@@ -18,14 +18,14 @@ services:
     image: influxdb:latest
     restart: always
     ports:
-      - '8086:8086'
-      - '2223:22'
+      - "8086:8086"
+      - "2223:22"
     stdin_open: true
     tty: true
     volumes:
       - influxdb-data:/var/lib/influxdb
     env_file:
-      - 'env.influxdb'
+      - "env.influxdb"
     command: >
       sh -c "
         apt-get update &&
@@ -42,7 +42,7 @@ services:
     container_name: disk_usage_cronjob
     restart: always
     ports:
-      - '2222:22'
+      - "2222:22"
     build:
       context: disk_usage_cronjob
     depends_on:
