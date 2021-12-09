@@ -19,5 +19,8 @@ COPY src/ .
 # add execute permission wait-for-it.sh
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
+# add execute permission wait-for-it.sh
+COPY wait-for.sh /wait-for.sh
+RUN chmod +x /wait-for.sh
 # command to run on container start
 CMD ["python", "main.py"]
