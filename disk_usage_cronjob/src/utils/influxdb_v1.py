@@ -23,6 +23,9 @@ class InfluxDB:
             print('[*] Creating new influx client instance')
             InfluxDB.__influx_client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,org=InfluxDB.org)
             print("CLient", InfluxDB.__influx_client)
+            buckets_api = InfluxDB.__influx_client.buckets_api()
+            bucket = buckets_api.find_bucket_by_name("ADEL_BUCKET")
+            print("bucket===>", bucket)
 
         # Created bucket if not exists
         # InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
