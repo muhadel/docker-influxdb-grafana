@@ -5,8 +5,7 @@ WORKDIR /app
 # install openssh & sshpass in the docker container
 RUN apt-get update && apt-get install -y sshpass openssh-client
 # generage ssh key with passphrase password
-# RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P password
-RUN ssh-keygen -m PEM -t rsa -P "" 
+RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 # change permissions of id_rsa
 RUN chmod 600 /root/.ssh/id_rsa.pub
 RUN chmod 755 ~/.ssh
