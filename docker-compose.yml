@@ -30,8 +30,6 @@ services:
       - "env.influxdb"
     command: >
       sh -c "
-        apt-get update &&
-        
         /bin/sh -c /entrypoint.sh
         "
     networks:
