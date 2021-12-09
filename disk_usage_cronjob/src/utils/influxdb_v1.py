@@ -42,6 +42,7 @@ class InfluxDB:
         # if not bucket:
         retention_rules = BucketRetentionRules(type="expire", every_seconds=360000)
         created_bucket = buckets_api.create_bucket(bucket_name=bucket_name,
+                                            bucket=bucket_name,
                                             retention_rules=retention_rules,
                                             org=InfluxDB.org,
                                             org_id=InfluxDB.org)
