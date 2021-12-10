@@ -11,6 +11,7 @@ spec:
     - host: ec2-63-33-190-1.eu-west-1.compute.amazonaws.com
       http:
         paths:
-          - grafana:
-            serviceName: grafana-service
-            servicePort: 3000
+          - path: /
+            backend:
+              serviceName: grafana-service
+              servicePort: 3000
