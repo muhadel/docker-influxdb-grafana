@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker-influx-grafana
+  name: grafana-deployment
 spec:
   replicas: 1
   selector:
@@ -12,11 +12,10 @@ spec:
     metadata:
       labels:
         app: grafana
-      name: grafana-pod
     spec:
       containers:
-        - image: grafana/grafana
-          name: grafana
+        - name: grafana
+          image: grafana/grafana
           ports:
             - containerPort: 3000
           stdin: true
