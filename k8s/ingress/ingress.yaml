@@ -21,7 +21,8 @@ spec:
           #       port:
           #         number: 8086
           - pathType: Prefix
-            path: /grafana/?(.*)
+            # path: /grafana/?(.*)
+            path: /(login|grafana)?(.*)
             backend:
               service:
                 name: grafana-service
