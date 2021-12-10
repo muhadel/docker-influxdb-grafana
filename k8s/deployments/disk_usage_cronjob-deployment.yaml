@@ -23,25 +23,25 @@ spec:
         name: disk-usage-cronjob
         stdin: true
         tty: true
-        env:
-          - name: INFLUXDB_CONTAINER_USER
-            valueFrom:
-              configMapKeyRef:
-                key: INFLUXDB_CONTAINER_USER
-                name: env-influxdb
-          - name: INFLUXDB_CONTAINER_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                key: INFLUXDB_CONTAINER_PASSWORD
-                name: env-influxdb
-          - name: INFLUXDB_CONTAINER_HOST
-            valueFrom:
-              configMapKeyRef:
-                key: INFLUXDB_CONTAINER_HOST
-                name: env-influxdb
-          # - name: INFLUXDB_CONTAINER_PORT
-          #   valueFrom:
-          #     configMapKeyRef:
-          #       key: INFLUXDB_CONTAINER_PORT
-          #       name: env-influxdb
+        # env:
+        #   - name: INFLUXDB_CONTAINER_USER
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         key: INFLUXDB_CONTAINER_USER
+        #         name: env-influxdb
+        #   - name: INFLUXDB_CONTAINER_PASSWORD
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         key: INFLUXDB_CONTAINER_PASSWORD
+        #         name: env-influxdb
+        #   - name: INFLUXDB_CONTAINER_HOST
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         key: INFLUXDB_CONTAINER_HOST
+        #         name: env-influxdb
+        # - name: INFLUXDB_CONTAINER_PORT
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       key: INFLUXDB_CONTAINER_PORT
+        #       name: env-influxdb
       restartPolicy: Always
