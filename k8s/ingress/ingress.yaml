@@ -13,7 +13,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/grafana"
+            path: "/"
             backend:
               service:
                 name: grafana-service
