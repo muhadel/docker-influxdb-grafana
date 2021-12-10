@@ -25,6 +25,3 @@ spec:
             - mountPath: /var/lib/grafana
               name: grafana-data
       restartPolicy: Always
-      volumes:
-        - claimName: grafana-data
-          name: grafana-data
