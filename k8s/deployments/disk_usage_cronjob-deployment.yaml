@@ -39,9 +39,9 @@ spec:
               configMapKeyRef:
                 key: INFLUXDB_CONTAINER_HOST
                 name: env-influxdb
-          - name: INFLUXDB_CONTAINER_PORT
-            valueFrom:
-              configMapKeyRef:
-                key: INFLUXDB_CONTAINER_PORT
-                name: env-influxdb
+          # - name: INFLUXDB_CONTAINER_PORT
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       key: INFLUXDB_CONTAINER_PORT
+          #       name: env-influxdb
       restartPolicy: Always
