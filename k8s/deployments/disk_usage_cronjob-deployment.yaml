@@ -14,15 +14,16 @@ spec:
         app: disk_usage_cronjob
     spec:
       containers:
-        # - args:
-        #     - sh
-        #     - -c
-        #     - "/wait-for-it.sh $${INFLUXDB_CONTAINER_HOST}:$${INFLUXDB_CONTAINER_PORT} --strict -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
-        #       python main.py"
-        image: muhadel/disk_usage_cronjob
+      
+        - image: muhadel/disk_usage_cronjob
         name: disk-usage-cronjob
         stdin: true
         tty: true
+        # args:
+        # - sh
+        # - -c
+        # - "/wait-for-it.sh $${INFLUXDB_CONTAINER_HOST}:$${INFLUXDB_CONTAINER_PORT} --strict -- sshpass -p $${INFLUXDB_CONTAINER_PASSWORD} ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no $${INFLUXDB_CONTAINER_USER}@$${INFLUXDB_CONTAINER_HOST} &&
+        #   python main.py"
         # env:
         #   - name: INFLUXDB_CONTAINER_USER
         #     valueFrom:
