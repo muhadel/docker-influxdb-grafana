@@ -14,7 +14,6 @@ spec:
         app: disk_usage_cronjob
     spec:
       containers:
-      
         - image: muhadel/disk_usage_cronjob
         name: disk-usage-cronjob
         stdin: true
