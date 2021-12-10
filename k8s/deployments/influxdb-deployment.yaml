@@ -23,7 +23,12 @@ spec:
           args:
             - sh
             - -c
-            - "\n  apt-get update &&\n  apt install -y openssh-server &&\n  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&\n  service ssh start &&\n  usermod --password $(echo influxdb | openssl passwd -1 -stdin) influxdb &&\n  /bin/sh -c /entrypoint.sh\n  "
+            - "apt-get update &&
+              apt install -y openssh-server &&
+              echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
+              service ssh start &&
+              usermod --password $(echo influxdb | openssl passwd -1 -stdin) influxdb &&
+              /bin/sh -c /entrypoint.sh"
           env:
             - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
               valueFrom:
