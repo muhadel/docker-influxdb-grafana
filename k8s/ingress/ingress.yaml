@@ -19,5 +19,5 @@ spec:
                 name: grafana-service
                 port:
                   number: 3000
-            path: /(login|grafana)?(.*)
+            path: /
   ingressClassName: nginx
