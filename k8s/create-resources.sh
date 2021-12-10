@@ -8,6 +8,7 @@ kubectl apply -f k8s/deployments/grafana-deployment.yaml
 kubectl apply -f k8s/services/grafana-service.yaml
 # Influxdb
 kubectl apply -f k8s/deployments/influxdb-deployment.yaml
+kubectl apply -f k8s/configmap/env-influxdb-configmap.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
 # Ingress
 kubectl apply -f k8s/ingress/ingress.yaml
