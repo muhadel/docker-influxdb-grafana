@@ -6,6 +6,8 @@ data:
   DOCKER_INFLUXDB_INIT_ORG: my-org
   DOCKER_INFLUXDB_INIT_PASSWORD: P@ssw0rd123
   DOCKER_INFLUXDB_INIT_USERNAME: admin
+  INFLUXDB_CONTAINER_USER: root
+  INFLUXDB_CONTAINER_PASSWORD: root123
 kind: ConfigMap
 metadata:
   name: env-influxdb
