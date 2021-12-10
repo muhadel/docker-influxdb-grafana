@@ -21,10 +21,10 @@ spec:
             - containerPort: 3000
           stdin: true
           tty: true
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-data
+          # volumeMounts:
+          #   - mountPath: /var/lib/grafana
+          #     name: grafana-data
       restartPolicy: Always
-      volumes:
-        - claimName: grafana-data
-          name: grafana-data
+      # volumes:
+      #   - claimName: grafana-data
+      #     name: grafana-data
