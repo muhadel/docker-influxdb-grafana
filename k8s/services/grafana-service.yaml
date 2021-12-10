@@ -8,7 +8,9 @@ spec:
   ports:
     - name: grafana-port
       protocol: TCP
-      port: 5000
+      port: 80
       targetPort: 3000
+  externalIPs:
+    - 63.33.190.1
   selector:
     app: grafana
