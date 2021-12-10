@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana-deployment
-  namespace: docker-influxdb-grafana
+  namespace: myapp
 spec:
   replicas: 1
   selector:

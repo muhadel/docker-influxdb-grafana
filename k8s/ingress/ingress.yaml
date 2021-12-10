@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
-  namespace: docker-influxdb-grafana
+  namespace: myapp
   annotations:
     INGRESS.kubernetes.io/rewrite-target: /
 spec:
