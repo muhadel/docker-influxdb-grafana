@@ -10,7 +10,5 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 3000
-  externalIPs:
-    - 63.33.190.1
   selector:
     app: grafana
