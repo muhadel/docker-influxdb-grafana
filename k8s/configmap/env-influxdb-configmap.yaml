@@ -8,7 +8,7 @@ data:
   DOCKER_INFLUXDB_INIT_USERNAME: admin
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
+  name: env-influxdb
+  namespace: app
   labels:
     name: influxdb-env-influxdb
-  name: env-influxdb
