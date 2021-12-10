@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: DockerInfluxGrafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: grafana-pod
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: grafana/grafana
+          name: grafana
+          ports:
+            - containerPort: 3000
+          stdin: true
+          tty: true
+          restartPolicy: Always
+          volumes:
+            - name: grafana-data
+            persistentVolumeClaim:
+              claimName: grafana-data
+  selector:
+    matchLabels:
+      app: grafana
