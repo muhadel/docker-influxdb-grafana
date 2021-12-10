@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  INFLUXDB_URL: "http://influxdb:8086"
+  INFLUXDB_USERNAME: admin
+  INFLUXDB_PASSWORD: P@ssw0rd123
+  INFLUXDB_ORG: my-org
+  INFLUXDB_BUCKET: P@default
+  INFLUXDB_ADMIN_TOKEN: this-is-my-super-secret-token
+  INFLUXDB_CONTAINER_HOST: influxdb
+  INFLUXDB_CONTAINER_PORT: "8086"
+  INFLUXDB_CONTAINER_USER: root
+  INFLUXDB_CONTAINER_PASSWORD: root123
+kind: ConfigMap
+metadata:
+  name: env-cronjob
+  namespace: app
+  labels:
+    name: cronjob-env-cronjob
