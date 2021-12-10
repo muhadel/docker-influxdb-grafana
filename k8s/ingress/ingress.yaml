@@ -16,12 +16,12 @@ spec:
           - pathType: Prefix
             path: "/"
             backend:
-              serviceName: grafana-service
-              servicePort: 3000
-              # service:
-              #   name: grafana-service
-              #   port:
-              #     number: 80
+              # serviceName: grafana-service
+              # servicePort: 3000
+              service:
+                name: grafana-service
+                port:
+                  number: 3000
           # - pathType: Prefix
           #   path: "/api/users/?(.*)"
           #   backend:
