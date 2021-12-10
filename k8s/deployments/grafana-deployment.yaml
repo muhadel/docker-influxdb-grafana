@@ -28,4 +28,5 @@ spec:
       volumes:
         - claimName: grafana-data
           name: grafana-data
-          persistentVolumeClaim: ~
+          persistentVolumeClaim:
+            claimName: grafana-data
