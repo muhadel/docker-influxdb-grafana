@@ -15,7 +15,7 @@ kubectl apply -f k8s/configmap/env-influxdb-configmap.yaml
 kubectl apply -f k8s/deployments/influxdb-deployment.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
 echo "Creating disk_usage_cronjob Resources..."
-kubectl apply -f k8s/deployments/disk_usage_cronjob-deployment.yaml
+# kubectl apply -f k8s/deployments/disk_usage_cronjob-deployment.yaml
 # kubectl apply -f k8s/services/disk_usage_cronjob-service.yaml
 # Ingress
 echo "Creating Ingress service..."
