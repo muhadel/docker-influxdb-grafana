@@ -13,13 +13,13 @@ spec:
   rules:
     - http:
         paths:
-          # - pathType: Prefix
-          #   path: /influxdb/
-          #   backend:
-          #     service:
-          #       name: influxdb-service
-          #       port:
-          #         number: 8086
+          - pathType: Prefix
+            path: /(influxdb|dola)?(.*)
+            backend:
+              service:
+                name: influxdb-service
+                port:
+                  number: 8086
           - pathType: Prefix
             # path: /grafana/?(.*)
             path: /(login|grafana)?(.*)
