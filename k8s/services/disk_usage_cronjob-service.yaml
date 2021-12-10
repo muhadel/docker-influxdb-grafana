@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: disk-usage-cronjob
+  namespace: app
+spec:
+  selector:
+    app: disk_usage_cronjob
