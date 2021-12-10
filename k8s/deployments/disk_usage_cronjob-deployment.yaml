@@ -20,39 +20,4 @@ spec:
             - containerPort: 3000
           stdin: true
           tty: true
-          args:
-            - sh
-            - -c
-            - "\n  apt-get update &&\n  apt install -y openssh-server &&\n  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&\n  service ssh start &&\n  usermod --password $(echo influxdb | openssl passwd -1 -stdin) influxdb &&\n  /bin/sh -c /entrypoint.sh\n  "
-          env:
-            - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
-                  name: env-influxdb
-            - name: DOCKER_INFLUXDB_INIT_BUCKET
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_BUCKET
-                  name: env-influxdb
-            - name: DOCKER_INFLUXDB_INIT_MODE
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_MODE
-                  name: env-influxdb
-            - name: DOCKER_INFLUXDB_INIT_ORG
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_ORG
-                  name: env-influxdb
-            - name: DOCKER_INFLUXDB_INIT_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_PASSWORD
-                  name: env-influxdb
-            - name: DOCKER_INFLUXDB_INIT_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  key: DOCKER_INFLUXDB_INIT_USERNAME
-                  name: env-influxdb
       restartPolicy: Always
