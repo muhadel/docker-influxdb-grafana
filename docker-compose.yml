@@ -28,6 +28,8 @@ services:
       - influxdb-data:/var/lib/influxdb
     env_file:
       - "env.influxdb"
+      # Entry Point for Influx version1 => influxd
+      # Entry Point for Influx version2 => /bin/sh -c /entrypoint.sh
     command: >
       sh -c "
         apt-get update &&
