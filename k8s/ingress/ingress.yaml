@@ -2,9 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
-  namespace: app
   annotations:
-    INGRESS.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+  labels:
+    name: ingress-service
 spec:
   rules:
     - host: ec2-63-33-190-1.eu-west-1.compute.amazonaws.com
