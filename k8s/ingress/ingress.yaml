@@ -9,7 +9,7 @@ metadata:
     name: ingress-service
 spec:
   rules:
-    - host: localhost
+    - host: myapp.info
       http:
         paths:
           - pathType: Prefix
