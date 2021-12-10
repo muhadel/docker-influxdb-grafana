@@ -22,7 +22,6 @@ services:
     restart: always
     ports:
       - "8086:8086"
-      - "2003:2003"
     stdin_open: true
     tty: true
     volumes:
