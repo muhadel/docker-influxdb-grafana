@@ -18,6 +18,9 @@ spec:
           stdin: true
           tty: true
           restartPolicy: Always
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-data
           volumes:
             - name: grafana-data
             persistentVolumeClaim:
