@@ -9,7 +9,7 @@ metadata:
     name: ingress-service
 spec:
   rules:
-    - host: ec2-63-33-190-1.eu-west-1.compute.amazonaws.com
+    - host: ec2-63-33-190
       http:
         paths:
           - pathType: Prefix
