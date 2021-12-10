@@ -1,14 +1,18 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: DockerInfluxGrafana
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
   template:
     metadata:
-      name: grafana-pod
       labels:
         app: grafana
+      name: grafana-pod
     spec:
       containers:
         - image: grafana/grafana
@@ -22,9 +26,6 @@ spec:
               name: grafana-data
       restartPolicy: Always
       volumes:
-        - name: grafana-data
-        persistentVolumeClaim:
-          claimName: grafana-data
-  selector:
-    matchLabels:
-      app: grafana
+        - claimName: grafana-data
+          name: grafana-data
+          persistentVolumeClaim: ~
