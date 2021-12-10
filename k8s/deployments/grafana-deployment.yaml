@@ -17,14 +17,14 @@ spec:
             - containerPort: 3000
           stdin: true
           tty: true
-          restartPolicy: Always
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-data
-          volumes:
-            - name: grafana-data
-            persistentVolumeClaim:
-              claimName: grafana-data
+      restartPolicy: Always
+      volumes:
+        - name: grafana-data
+        persistentVolumeClaim:
+          claimName: grafana-data
   selector:
     matchLabels:
       app: grafana
