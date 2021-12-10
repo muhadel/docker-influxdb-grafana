@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: DockerInfluxGrafana
+  name: docker-influx-grafana
 spec:
   replicas: 1
   selector:
