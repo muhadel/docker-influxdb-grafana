@@ -5,6 +5,8 @@ from utils.config import config
 
 class InfluxDB:
     __influx_client = None
+    host = config.get('INFLUXDB_CONTAINER_HOST')
+    port = config.get('INFLUXDB_CONTAINER_PORT')
     url = config.get('INFLUXDB_URL')
     token = config.get('INFLUXDB_ADMIN_TOKEN')
     org = config.get('INFLUXDB_ORG')
@@ -21,7 +23,13 @@ class InfluxDB:
         """
         if InfluxDB.__influx_client is None:
             print('[*] Creating new influx client instance')
-            InfluxDB.__influx_client = InfluxDBClient(url=InfluxDB.url, token=InfluxDB.token,org=InfluxDB.org)
+            url = "http://{}:{}".format(InfluxDB.host, InfluxDB.port)
+            print("[*] INFLUX_VERSION=",'v2')
+            print("[*] URL=", url)
+            print("[*] TOKEN=", InfluxDB.token)
+            print("[*] ORG=", InfluxDB.org)
+            print("[*] BUCKET=", InfluxDB.bucket)
+            InfluxDB.__influx_client = InfluxDBClient(url, token=InfluxDB.token,org=InfluxDB.org)
 
         # Created bucket if not exists
         InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)

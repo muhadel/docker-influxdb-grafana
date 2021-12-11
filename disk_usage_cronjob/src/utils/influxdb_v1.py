@@ -23,9 +23,16 @@ class InfluxDB:
         :return: InfluxDB client instance, return the same client instance when creating a new InfluxDB instance.
         """
         if InfluxDB.__influx_client is None:
+            print('[*] Creating new influx client instance')
+            print("[*] INFLUX_VERSION=",'v1')
+            print("[*] HOST=", InfluxDB.host)
+            print("[*] PORT=", InfluxDB.port)
+            print("[*] USER=", InfluxDB.username)
+            print("[*] PASSWORD=", InfluxDB.password)
+            print("[*] BUCKET=", InfluxDB.bucket)
             InfluxDB.__influx_client = InfluxDBClient(host=InfluxDB.host,
                                                     port=InfluxDB.port,
-                                                    username=InfluxDB.port,
+                                                    username=InfluxDB.username,
                                                     password=InfluxDB.password)
             # Created bucket if not exists
             InfluxDB.create_bucket(InfluxDB, InfluxDB.bucket)
