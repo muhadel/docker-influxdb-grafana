@@ -14,7 +14,7 @@ spec:
     - http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /grafana(/|$)(.*)
             backend:
               service:
                 name: grafana-service
