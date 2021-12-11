@@ -13,8 +13,8 @@ spec:
   rules:
     - http:
         paths:
-          - pathType: ImplementationSpecific
-            path: /(grafana|login|public|api)(/|$)(.*)
+          - pathType: Prefix
+            path: /
             backend:
               service:
                 name: grafana-service
