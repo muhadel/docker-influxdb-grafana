@@ -6,9 +6,11 @@ metadata:
   labels:
     app: influxdb
 spec:
+  nodeName: kube-01
   containers:
     - name: influxdb
       image: influxdb:latest
+
       env:
         - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
           valueFrom:
