@@ -9,6 +9,16 @@ spec:
   containers:
     - name: influxdb
       image: influxdb:latest
+      args:
+        - sh
+        - -c
+        - "apt-get update &&
+          apt install -y openssh-server &&
+          echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
+          echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config &&
+          service ssh start &&
+          usermod --password $$(echo $${INFLUXDB_CONTAINER_PASSWORD} | openssl passwd -1 -stdin) $${INFLUXDB_CONTAINER_USER} &&
+          /bin/sh -c /entrypoint.sh"
       env:
         - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
           valueFrom:
