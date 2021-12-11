@@ -17,8 +17,7 @@ echo "Creating Influxdb Resources..."
 kubectl apply -f k8s/pods/influxdb-pod.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
 echo "Creating cronjob config maps..."
-kubectl get pods -n app
-echo "wait 3 seconds..."
+echo "wait 4 seconds..."
 sleep 3
 INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I)
 echo "This is the InfluxDB IP", $INFLUXDB_POD_IP
