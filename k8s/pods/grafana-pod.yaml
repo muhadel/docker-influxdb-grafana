@@ -9,3 +9,8 @@ spec:
   containers:
     - name: grafana
       image: grafana/grafana
+      args:
+        - sh
+        - -c
+        - "echo ';serve_from_sub_path = true' >> /etc/grafana/grafana.ini &&
+          grafana-server"
