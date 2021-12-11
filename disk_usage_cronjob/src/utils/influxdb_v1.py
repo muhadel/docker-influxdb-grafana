@@ -8,9 +8,6 @@ class InfluxDB:
     port = config.get('INFLUXDB_CONTAINER_PORT').strip()
     username = config.get('INFLUXDB_USERNAME').strip()
     password = config.get('INFLUXDB_PASSWORD').strip()
-    # url = config.get('INFLUXDB_URL')
-    # token = config.get('INFLUXDB_ADMIN_TOKEN')
-    # org = config.get('INFLUXDB_ORG')
     bucket = config.get('INFLUXDB_BUCKET').strip()
 
     def __init__(self):
@@ -49,7 +46,7 @@ class InfluxDB:
 
     def write_data(self, measurement, fieldSet, tagSet=None):
         """
-        Write Data To InfluxDB version 2
+        Write Data To InfluxDB version 1
         :param measurement: The name of the measurement that you want to write your data to. The measurement is required in line protocol.
         :param fieldSet: The field(s) for your data point. Every data point requires at least one field in line protocol.
         Separate field key-value pairs with an equals sign = and no spaces
