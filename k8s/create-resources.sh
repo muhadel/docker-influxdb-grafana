@@ -18,7 +18,7 @@ kubectl apply -f k8s/services/grafana-service.yaml
 echo "Creating cronjob config maps..."
 # wait for influxdb pod creattion to take its IP address and add it in the configMap file
 # to be able to ssh into the saved ip and get the disk usage
-# sleep 4
+sleep 4
 #
 # Get INFLUXDB pod Ip address and remove white spaces
 INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I | xargs)
