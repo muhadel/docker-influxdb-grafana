@@ -20,7 +20,7 @@ echo "Creating disk_usage_cronjob Resources..."
 # kubectl apply -f k8s/configmap/env-cronjob-configmap.yaml
 # kubectl apply -f k8s/deployments/cronjob-deployment.yaml
 kubectl apply -f k8s/pods/cronjob-pod.yaml
-kubectl apply -f k8s/services/cronjob-service.yaml
+# kubectl apply -f k8s/services/cronjob-service.yaml
 # Ingress
 echo "Creating Ingress service..."
 kubectl apply -f k8s/ingress/ingress.yaml
