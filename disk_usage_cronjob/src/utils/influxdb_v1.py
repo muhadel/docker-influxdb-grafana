@@ -4,14 +4,14 @@ from utils.config import config
 
 class InfluxDB:
     __influx_client = None
-    host = config.get('INFLUXDB_CONTAINER_HOST')
-    port = config.get('INFLUXDB_CONTAINER_PORT')
-    username = config.get('INFLUXDB_USERNAME')
-    password = config.get('INFLUXDB_PASSWORD')
+    host = config.get('INFLUXDB_CONTAINER_HOST').strip()
+    port = config.get('INFLUXDB_CONTAINER_PORT').strip()
+    username = config.get('INFLUXDB_USERNAME').strip()
+    password = config.get('INFLUXDB_PASSWORD').strip()
     # url = config.get('INFLUXDB_URL')
     # token = config.get('INFLUXDB_ADMIN_TOKEN')
     # org = config.get('INFLUXDB_ORG')
-    bucket = config.get('INFLUXDB_BUCKET')
+    bucket = config.get('INFLUXDB_BUCKET').strip()
 
     def __init__(self):
         self.__influx_client = InfluxDB.get_influx_client()

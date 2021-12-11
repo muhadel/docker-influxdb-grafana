@@ -2,7 +2,7 @@
 import schedule
 from datetime import datetime
 from utils.disk_usage import get_disk_usage
-from utils.influxdb_v1 import InfluxDB
+from utils.influxdb_v2 import InfluxDB
 
 
 # Cron Job to run every 5 seconds.
