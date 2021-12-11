@@ -12,11 +12,11 @@ The main idea of this project is to create 3 docker containers (Influx, Grafana,
 And to record the disk usage in influxdb container and plot the disk usage graph in grafana so we can monitor the disk usage.
 
 
-| Containers         | Entry URL                 |
-| :----------------: | :------------------------:|
-| Grafana             | http://63.33.190.1:3000   |
-| InfluxDB           | http://63.33.190.1:8086/health   |
-| disk_usage_cronjob | -                         |
+| Containers         | Entry URL                            |
+| :----------------: | :-----------------------------------:|
+| Grafana            | http://63.33.190.1/                  |
+| InfluxDB           | http://63.33.190.1/influxdb/health   |
+| disk_usage_cronjob | -                                    |
 
 
 ## disk_usage_cronjob repo structure:
