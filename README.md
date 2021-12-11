@@ -5,7 +5,6 @@
 2. [disk_usage_cronjob repo structure](#disk_usage_cronjob-repo-structure)
 3. [Grafana Disk Usage Dashboard](#grafana-disk-usage-dashboard)
 4. [Run app by docker-compose](#run-app-by-docker-compose)
-5. [kubectl deployments](#kubectl-deployments)
 
 ## Docker Influxdb Grafana
 
@@ -39,7 +38,4 @@ And to record the disk usage in influxdb container and plot the disk usage graph
 ```bash
 $ docker-compose up --build
 ```
-
-## Kubectl deployments
-![image](https://user-images.githubusercontent.com/32979588/144723759-aaf266eb-2ef7-485b-bada-fad8409fb321.png)
 
