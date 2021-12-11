@@ -2,6 +2,7 @@
 import schedule
 from datetime import datetime
 from utils import influxdb_v2, disk_usage
+from utils.config import config
 
 
 # Cron Job to run every 5 seconds.
@@ -18,12 +19,13 @@ def job():
     influx_db.write_data('disk_usage', influx_line_protocol, 'host=influxdb,Unit=Megabyte')
 
 if __name__ == '__main__':
-    try:
-        print("[*] Initialize CronJob: ")
+    print(config)
+    # try:
+    #     print("[*] Initialize CronJob: ")
         
-        schedule.every(5).seconds.do(job)
-        while True:
-            schedule.run_pending()
-    except Exception as e:
-        print("[*] Oops!", e.__class__, "occurred.")
-        print(e)
+    #     schedule.every(5).seconds.do(job)
+    #     while True:
+    #         schedule.run_pending()
+    # except Exception as e:
+    #     print("[*] Oops!", e.__class__, "occurred.")
+    #     print(e)
