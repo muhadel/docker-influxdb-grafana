@@ -16,7 +16,8 @@ echo "Creating Influxdb Resources..."
 kubectl apply -f k8s/pods/influxdb-pod.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
 echo "Creating cronjob config maps..."
-# wait for influxdb pod creattion to take it's IP address and add it in the configMap file
+# wait for influxdb pod creattion to take its IP address and add it in the configMap file
+# to be able to ssh into the saved ip and get the disk usage
 sleep 4
 #
 # Get INFLUXDB pod Ip address and remove white spaces
