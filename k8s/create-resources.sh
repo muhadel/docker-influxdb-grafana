@@ -13,19 +13,18 @@ echo "Creating Grafana Resources..."
 # kubectl apply -f k8s/services/grafana-service.yaml
 # Influxdb
 echo "Creating Influxdb Resources..."
-# kubectl apply -f k8s/deployments/influxdb-deployment.yaml
 kubectl apply -f k8s/pods/influxdb-pod.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
 echo "Creating cronjob config maps..."
-echo "wait 4 seconds..."
+# wait for influxdb pod creattion to take it's IP address and add it in the configMap file
 sleep 4
+#x
+# Get INFLUXDB pod Ip address and remove white spaces
 INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I | xargs)
-echo "INFLUXDB_POD_IP=$INFLUXDB_POD_IP"
 cat k8s/configmap/env-cronjob-configmap.yaml | sed "s/{{INFLUXDB_POD_IP}}/$INFLUXDB_POD_IP/g" | kubectl apply -f -
 echo "------------------------------------------------"
 echo "Creating disk_usage_cronjob Resources..."
-# kubectl apply -f k8s/deployments/cronjob-deployment.yaml
-kubectl apply -f k8s/pods/cronjob-pod.yaml
+xkubectl apply -f k8s/pods/cronjob-pod.yaml
 kubectl apply -f k8s/services/cronjob-service.yaml
 echo "------------------------------------------------"
 # Ingress
