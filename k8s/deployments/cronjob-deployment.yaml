@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: disk-usage-cronjob-deployment
+  name: cronjob-deployment
   namespace: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: disk-usage-cronjob
+      app: cronjob
   template:
     metadata:
       labels:
-        app: disk-usage-cronjob
+        app: cronjob
     spec:
       containers:
         - image: python:3.8-slim-buster
-          name: disk-usage-cronjob
+          name: cronjob
           stdin: true
           tty: true
           # args:
