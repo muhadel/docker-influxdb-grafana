@@ -9,7 +9,6 @@ spec:
   containers:
     - name: influxdb
       image: influxdb:latest
-      restartPolicy: Always
       env:
         - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
           valueFrom:

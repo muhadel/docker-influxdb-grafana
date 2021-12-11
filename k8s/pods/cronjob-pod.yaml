@@ -9,4 +9,3 @@ spec:
   containers:
     - name: cronjob
       image: python:3.8-slim-buster
-      restartPolicy: Always
