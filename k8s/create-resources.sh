@@ -7,14 +7,14 @@ echo "Creating New Namespace..."
 kubectl apply -f k8s/namespace/app-namespace.yaml
 # Create Influxdb config maps
 kubectl apply -f k8s/configmap/env-influxdb-configmap.yaml
-# Grafana
-echo "Creating Grafana Resources..."
-# kubectl apply -f k8s/deployments/grafana-deployment.yaml
-# kubectl apply -f k8s/services/grafana-service.yaml
 # Influxdb
 echo "Creating Influxdb Resources..."
 kubectl apply -f k8s/pods/influxdb-pod.yaml
 kubectl apply -f k8s/services/influxdb-service.yaml
+# Grafana
+echo "Creating Grafana Resources..."
+kubectl apply -f k8s/pods/grafana-pod.yaml
+kubectl apply -f k8s/services/grafana-service.yaml
 echo "Creating cronjob config maps..."
 # wait for influxdb pod creattion to take its IP address and add it in the configMap file
 # to be able to ssh into the saved ip and get the disk usage
