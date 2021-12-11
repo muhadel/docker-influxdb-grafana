@@ -4,7 +4,7 @@ KUB_NAME_SPACE=app
 kubectl delete all --all -n $KUB_NAME_SPACE
 kubectl delete namespace $KUB_NAME_SPACE
 echo "Creating New Namespace..."
-kubectl create ns $KUB_NAME_SPACE
+kubectl apply -f k8s/namespace/app-namespace.yaml
 # Create Influxdb config maps
 kubectl apply -f k8s/configmap/env-influxdb-configmap.yaml
 # Grafana
