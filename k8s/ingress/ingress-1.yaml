@@ -22,7 +22,7 @@ spec:
                 port:
                   number: 3000
 
-          - pathType: ImplementationSpecific
+          - pathType: Prefix
             path: /public(/|$)(.*)
             backend:
               service:
