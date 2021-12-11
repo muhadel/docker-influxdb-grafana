@@ -1,8 +1,8 @@
 # Pkg:
 import schedule
 from datetime import datetime
-from utils import influxdb_v2, disk_usage
-from utils.config import config
+from utils.disk_usage import get_disk_usage
+from utils.influxdb_v1 import InfluxDB
 
 
 # Cron Job to run every 5 seconds.
@@ -12,16 +12,15 @@ def job():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     print("[*] Cron job executed at " + dt_string)
     # Get disk usage by running Df command on the influxdb container
-    stat = disk_usage.get_disk_usage()
+    stat = get_disk_usage()
     print("[*] Disk usage statistics: ", stat)
-    influx_db = influxdb_v2.InfluxDB()
+    influx_db = InfluxDB()
     influx_line_protocol = "total={},used={},free={}".format(stat[1], stat[2], stat[3])
     influx_db.write_data('disk_usage', influx_line_protocol, 'host=influxdb,Unit=Megabyte')
 
 if __name__ == '__main__':
     try:
         print("[*] Initialize CronJob: ")
-        
         schedule.every(5).seconds.do(job)
         while True:
             schedule.run_pending()
