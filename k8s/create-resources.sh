@@ -30,4 +30,5 @@ kubectl apply -f k8s/services/cronjob-service.yaml
 echo "------------------------------------------------"
 # Ingress
 echo "Creating Ingress service..."
-kubectl apply -f k8s/ingress/ingress.yaml
+kubectl apply -f k8s/ingress/ingress-1.yaml
+kubectl apply -f k8s/ingress/ingress-2.yaml
