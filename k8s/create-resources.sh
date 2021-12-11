@@ -19,7 +19,7 @@ kubectl apply -f k8s/services/influxdb-service.yaml
 echo "Creating cronjob config maps..."
 echo "wait 4 seconds..."
 sleep 4
-INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I)
+INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I | xargs)
 echo "INFLUXDB_POD_IP=$INFLUXDB_POD_IP"
 cat k8s/configmap/env-cronjob-configmap.yaml | sed "s/{{INFLUXDB_POD_IP}}/$INFLUXDB_POD_IP/g" | kubectl apply -f -
 echo "------------------------------------------------"
