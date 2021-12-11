@@ -6,7 +6,6 @@ metadata:
   labels:
     app: influxdb
 spec:
-  nodeName: kube-01
   containers:
     - name: influxdb
       image: influxdb:latest
