@@ -72,5 +72,5 @@ spec:
                   key: INFLUXDB_CONTAINER_PASSWORD
                   name: env-influxdb
       hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: Default
       restartPolicy: Always
