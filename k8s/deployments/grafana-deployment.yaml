@@ -20,6 +20,6 @@ spec:
             - containerPort: 3000
           stdin: true
           tty: true
-      hostNetwork: true
-      dnsPolicy: Default
+      # hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
