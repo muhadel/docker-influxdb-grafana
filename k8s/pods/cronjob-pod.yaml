@@ -23,6 +23,8 @@ spec:
               key: INFLUXDB_URL
               name: env-cronjob
         - name: INFLUXDB_CONTAINER_HOST
+          value: "doola"
+        - name: INFLUXDB_CONTAINER_HOST
           valueFrom:
             configMapKeyRef:
               key: INFLUXDB_CONTAINER_HOST
