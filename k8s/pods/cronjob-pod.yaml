@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cronjob-pod
+  namespace: app
+  labels:
+    app: cronjob
+spec:
+  containers:
+    - name: cronjob
+      image: python:3.8-slim-buster
+      restartPolicy: Always

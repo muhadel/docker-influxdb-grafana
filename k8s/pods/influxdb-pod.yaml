@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: influxdb-pod
+  namespace: app
+  labels:
+    app: influxdb
+spec:
+  containers:
+    - name: influxdb
+      image: influxdb:latest
+      restartPolicy: Always
+      env:
+        - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+              name: env-influxdb
+        - name: DOCKER_INFLUXDB_INIT_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_BUCKET
+              name: env-influxdb
+        - name: DOCKER_INFLUXDB_INIT_MODE
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_MODE
+              name: env-influxdb
+        - name: DOCKER_INFLUXDB_INIT_ORG
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_ORG
+              name: env-influxdb
+        - name: DOCKER_INFLUXDB_INIT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_PASSWORD
+              name: env-influxdb
+        - name: DOCKER_INFLUXDB_INIT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: DOCKER_INFLUXDB_INIT_USERNAME
+              name: env-influxdb
+        - name: INFLUXDB_CONTAINER_USER
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_CONTAINER_USER
+              name: env-influxdb
+        - name: INFLUXDB_CONTAINER_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_CONTAINER_PASSWORD
+              name: env-influxdb
