@@ -11,7 +11,7 @@ RUN chmod 600 /root/.ssh/id_rsa.pub
 # copy the dependencies file to the working directory
 COPY requirements.txt .
 # copy the environment variables
-COPY .env.example .env
+#COPY .env.example .env
 # install dependencies
 RUN pip install -r requirements.txt
 # copy the content of the local src directory to the working directory

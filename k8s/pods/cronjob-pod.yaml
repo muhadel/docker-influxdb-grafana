@@ -22,8 +22,31 @@ spec:
             configMapKeyRef:
               key: INFLUXDB_URL
               name: env-cronjob
-        - name: INFLUXDB_CONTAINER_HOST
-          value: "doola"
+        - name: INFLUXDB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_USERNAME
+              name: env-cronjob
+        - name: INFLUXDB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_PASSWORD
+              name: env-cronjob
+        - name: INFLUXDB_ORG
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_ORG
+              name: env-cronjob
+        - name: INFLUXDB_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_BUCKET
+              name: env-cronjob
+        - name: INFLUXDB_ADMIN_TOKEN
+          valueFrom:
+            configMapKeyRef:
+              key: INFLUXDB_ADMIN_TOKEN
+              name: env-cronjob
         - name: INFLUXDB_CONTAINER_HOST
           valueFrom:
             configMapKeyRef:
