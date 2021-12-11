@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: influxdb
-      image: influxdb:latest
+      image: influxdb:1.8
       args:
         - sh
         - -c
