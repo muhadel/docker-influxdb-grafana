@@ -15,12 +15,21 @@ spec:
     - http:
         paths:
           - pathType: ImplementationSpecific
-            path: /app1(/|$)(.*)
+            path: /grafana(/|$)(.*)
             backend:
               service:
                 name: grafana-service
                 port:
                   number: 3000
+
+          - pathType: ImplementationSpecific
+            path: /public(/|$)(.*)
+            backend:
+              service:
+                name: grafana-service
+                port:
+                  number: 3000
+
           - pathType: ImplementationSpecific
             path: /influxdb(/|$)(.*)
             backend:
