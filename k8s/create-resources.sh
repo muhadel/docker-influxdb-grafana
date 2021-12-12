@@ -25,8 +25,7 @@ INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I | xargs)
 cat k8s/configmap/env-cronjob-configmap.yaml | sed "s/{{INFLUXDB_POD_IP}}/$INFLUXDB_POD_IP/g" | kubectl apply -f -
 echo "Creating disk_usage_cronjob Resources..."
 kubectl apply -f k8s/pods/cronjob-pod.yaml
-# kubectl apply -f k8s/services/cronjob-service.yaml
 # Ingress
-echo "Creating Ingress service..."
+echo "Creating Ingress services..."
 kubectl apply -f k8s/ingress/influxdb-ingress.yaml
 kubectl apply -f k8s/ingress/grafana-ingress.yaml
