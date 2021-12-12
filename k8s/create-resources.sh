@@ -19,14 +19,13 @@ echo "Creating cronjob config maps..."
 # wait for influxdb pod creattion to take its IP address and add it in the configMap file
 # to be able to ssh into the saved ip and get the disk usage
 sleep 4
-#
 # Get INFLUXDB pod Ip address and remove white spaces
+# xargs do trimming by removing white spaces 
 INFLUXDB_POD_IP=$(kubectl exec influxdb-pod -n app -- hostname -I | xargs)
 cat k8s/configmap/env-cronjob-configmap.yaml | sed "s/{{INFLUXDB_POD_IP}}/$INFLUXDB_POD_IP/g" | kubectl apply -f -
 echo "Creating disk_usage_cronjob Resources..."
 kubectl apply -f k8s/pods/cronjob-pod.yaml
-kubectl apply -f k8s/services/cronjob-service.yaml
 # Ingress
-echo "Creating Ingress service..."
-kubectl apply -f k8s/ingress/ingress-1.yaml
-kubectl apply -f k8s/ingress/ingress-2.yaml
+echo "Creating Ingress services..."
+kubectl apply -f k8s/ingress/influxdb-ingress.yaml
+kubectl apply -f k8s/ingress/grafana-ingress.yaml

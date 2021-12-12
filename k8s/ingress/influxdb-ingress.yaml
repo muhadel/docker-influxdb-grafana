@@ -1,21 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-service-2
+  name: influxdb-ingress
   namespace: app
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
   labels:
-    name: ingress-service-2
+    name: influxdb-ingress
 spec:
   rules:
     - http:
         paths:
           - pathType: Prefix
-            path: /(.*)
+            path: /influxdb(/|$)(.*)
             backend:
               service:
-                name: grafana-service
+                name: influxdb-service
                 port:
-                  number: 3000
+                  number: 8086
   ingressClassName: nginx
