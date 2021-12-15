@@ -6,7 +6,7 @@
 3. [Migrate from influxdb v1 to v2](#migrate-from-influxdb-v1-to-v2)
 4. [Grafana Disk Usage Dashboard](#grafana-disk-usage-dashboard)
 5. [Run app by docker-compose](#run-app-by-docker-compose)
-6. [Manage app by mini-kube](#manage-app-by-mini-kube)
+6. [Manage app by minikube](#manage-app-by-minikube)
 
 ## Docker Influxdb Grafana
 
@@ -49,7 +49,7 @@ And to record the disk usage in influxdb container and plot the disk usage graph
 $ docker-compose up --build
 ```
 
-## Manage app by mini-kube
+## Manage app by minikube
 ```bash
 # Create Kubernetes resources
 $ sh k8s\create-resources.sh
