@@ -16,8 +16,8 @@ And to record the disk usage in influxdb container and plot the disk usage graph
 
 | Containers         | Entry URL                            |
 | :----------------: | :-----------------------------------:|
-| Grafana            | http://63.33.190.1/                  |
-| InfluxDB           | http://63.33.190.1/influxdb/health   |
+| Grafana            | http://x.x.x.x/                  |
+| InfluxDB           | http://x.x.x.x/influxdb/health   |
 | disk_usage_cronjob | -                                    |
 
 
